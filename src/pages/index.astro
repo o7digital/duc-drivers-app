@@ -1,49 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HeroMobility from "../components/HeroMobility";
-import FeatureCard from "../components/FeatureCard";
-import SmartCityMap from "../components/SmartCityMap";
-import OliviaAI from "../components/OliviaAI";
-import { Building2, CarFront, Command, MapPinned, UserRound } from "lucide-react";
+import LandingContent from "../components/LandingContent";
 ---
 
 <Layout title="Mobility OS Mexico - Demo">
   <HeroMobility client:load />
-  <section class="container-page py-16">
-    <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <span class="chip rounded-full px-4 py-2">Live Smart City Preview</span>
-        <h2 class="mt-5 text-4xl font-black tracking-tighter md:text-6xl">Operacion visible en tiempo real</h2>
-      </div>
-      <p class="max-w-2xl leading-8 text-slate-300">
-        Heat zones, servicios activos, cobranza, socios online y recomendaciones AI para mover oferta donde Mexico la necesita.
-      </p>
-    </div>
-    <div class="grid gap-5 xl:grid-cols-[1.2fr_.8fr]">
-      <SmartCityMap client:load />
-      <OliviaAI client:load defaultMode="admin" />
-    </div>
-  </section>
-  <section class="container-page grid gap-5 py-12 md:grid-cols-3">
-    <FeatureCard client:load href="/usuario" icon={UserRound} title="Experiencia Usuario" text="Solicitud de viaje, Olivia AI, conductor asignado, ETA, precio, seguridad, SOS, compartir viaje y modo turista Mundial 2026." />
-    <FeatureCard client:load href="/conductor" icon={CarFront} title="Experiencia Conductor / Socio" text="Portal premium para socios con mensualidad, estado de cuenta, ganancias, documentos, rating y bolsa de servicios." />
-    <FeatureCard client:load href="/control" icon={Command} title="Control Center" text="Command Center para KPIs, mapa vivo, cobranza, flota, prediccion de demanda, viajes activos y reportes." />
-  </section>
-  <section class="container-page py-16">
-    <div class="glass-card rounded-[2rem] p-8 md:p-10">
-      <MapPinned className="text-city-cyan" />
-      <h2 class="mt-5 max-w-4xl text-4xl font-black tracking-tighter md:text-6xl">No vendemos otra app de taxi.</h2>
-      <p class="mt-6 max-w-5xl text-lg leading-8 text-slate-300">
-        Vendemos una plataforma operativa para redes de movilidad mexicanas: socios que pagan mensualidad, conductores que toman servicios, administradores que controlan cobranza y usuarios que reciben una experiencia moderna.
-      </p>
-      <div class="mt-8 grid gap-4 md:grid-cols-3">
-        {["Cooperativas y agencias", "Aeropuertos y turismo", "Mundial 2026"].map((item) => (
-          <div class="rounded-3xl border border-slate-700/60 bg-slate-950/45 p-5">
-            <Building2 className="text-city-blue" />
-            <p class="mt-4 font-black">{item}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <LandingContent client:load />
 </Layout>

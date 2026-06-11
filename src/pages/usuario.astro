@@ -1,15 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageIntro from "../components/PageIntro";
 import UserRideExperience from "../components/UserRideExperience";
 ---
 
 <Layout title="Mobility OS Mexico - Experiencia Usuario">
-  <main class="container-page pt-14">
-    <span class="chip rounded-full px-4 py-2">Experiencia Usuario</span>
-    <h1 class="mt-5 max-w-5xl text-5xl font-black leading-none tracking-tighter md:text-7xl">Viajes seguros, inteligentes y listos para turismo.</h1>
-    <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
-      Ana Maria Lopez solicita Polanco hacia Aeropuerto CDMX Terminal 2 con Olivia AI, ETA, precio en MXN, seguridad y soporte Mundial 2026.
-    </p>
-  </main>
+  <PageIntro client:load page="usuario" />
   <UserRideExperience client:load />
 </Layout>

@@ -1,24 +1,59 @@
 import { useState } from "react";
 import { MapPin, Zap } from "lucide-react";
+import { pick, useLanguage } from "../i18n";
 
-const services = [
-  ["Aeropuerto CDMX Terminal 2", "$850 MXN", "92% probability"],
-  ["Santa Fe", "$240 MXN", "alta demanda"],
-  ["Cuernavaca", "$1,250 MXN", "larga distancia"],
-  ["Estadio Azteca", "$420 MXN", "evento activo"],
-];
+const copy = {
+  es: {
+    title: "Bolsa de servicios",
+    premium: "Premium",
+    available: "Disponible",
+    taken: "Servicio tomado",
+    services: [
+      ["Aeropuerto CDMX Terminal 2", "$850 MXN", "92% probability"],
+      ["Santa Fe", "$240 MXN", "alta demanda"],
+      ["Cuernavaca", "$1,250 MXN", "larga distancia"],
+      ["Estadio Azteca", "$420 MXN", "evento activo"],
+    ],
+  },
+  en: {
+    title: "Service marketplace",
+    premium: "Premium",
+    available: "Available",
+    taken: "Service taken",
+    services: [
+      ["Mexico City Airport Terminal 2", "$850 MXN", "92% probability"],
+      ["Santa Fe", "$240 MXN", "high demand"],
+      ["Cuernavaca", "$1,250 MXN", "long distance"],
+      ["Estadio Azteca", "$420 MXN", "active event"],
+    ],
+  },
+  fr: {
+    title: "Bourse de services",
+    premium: "Premium",
+    available: "Disponible",
+    taken: "Service pris",
+    services: [
+      ["Aeroport CDMX Terminal 2", "$850 MXN", "92% de probabilite"],
+      ["Santa Fe", "$240 MXN", "forte demande"],
+      ["Cuernavaca", "$1,250 MXN", "longue distance"],
+      ["Stade Azteca", "$420 MXN", "evenement actif"],
+    ],
+  },
+};
 
 export default function ServiceMarketplace() {
   const [taken, setTaken] = useState<string | null>(null);
+  const { language } = useLanguage();
+  const content = pick(copy, language);
 
   return (
     <div className="glass-card rounded-3xl p-5">
       <div className="flex items-center justify-between gap-4">
-        <h3 className="text-xl font-black tracking-tight">Bolsa de servicios</h3>
-        <span className="rounded-full bg-city-green/10 px-3 py-1 text-xs font-bold text-city-green">Premium</span>
+        <h3 className="text-xl font-black tracking-tight">{content.title}</h3>
+        <span className="rounded-full bg-city-green/10 px-3 py-1 text-xs font-bold text-city-green">{content.premium}</span>
       </div>
       <div className="mt-4 grid gap-3">
-        {services.map(([place, price, detail]) => (
+        {content.services.map(([place, price, detail]) => (
           <button
             key={place}
             onClick={() => setTaken(place)}
@@ -37,7 +72,7 @@ export default function ServiceMarketplace() {
                 {detail}
               </span>
               <span className={taken === place ? "font-black text-city-green" : "text-city-muted"}>
-                {taken === place ? "Servicio tomado" : "Disponible"}
+                {taken === place ? content.taken : content.available}
               </span>
             </div>
           </button>

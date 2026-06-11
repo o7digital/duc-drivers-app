@@ -27,3 +27,7 @@ npm run dev
 ```
 
 La demo corre localmente con datos simulados e interacciones para Olivia Mobility AI, bolsa de servicios, filtros del dashboard y modo Mundial 2026.
+
+## Idiomas
+
+La interfaz incluye switch ES / EN / FR persistente en localStorage. Espanol es el idioma por defecto.

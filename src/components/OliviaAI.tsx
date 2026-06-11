@@ -1,26 +1,65 @@
 import { useState } from "react";
 import { Bot, SendHorizontal, Sparkles } from "lucide-react";
+import { pick, useLanguage } from "../i18n";
 
 const presets = {
-  passenger: {
-    prompt: "Necesito llegar al aeropuerto manana a las 6 AM",
-    answer: ["Vehiculo reservado", "Salida recomendada: 4:55 AM", "Ruta segura: 98%", "Trafico analizado", "Conductor preasignado"],
+  es: {
+    subtitle: "Asistente operativo mock",
+    labels: { passenger: "Usuario", driver: "Conductor", admin: "Admin" },
+    passenger: {
+      prompt: "Necesito llegar al aeropuerto manana a las 6 AM",
+      answer: ["Vehiculo reservado", "Salida recomendada: 4:55 AM", "Ruta segura: 98%", "Trafico analizado", "Conductor preasignado"],
+    },
+    driver: {
+      prompt: "Cuanto gane esta semana?",
+      answer: ["Ganaste $5,480 MXN", "+18% respecto a la semana pasada", "Mejor zona: Aeropuerto CDMX", "Recomendacion: trabajar 5 PM - 8 PM"],
+    },
+    admin: {
+      prompt: "Quien no ha pagado su mensualidad?",
+      answer: ["25 socios con pagos vencidos", "8 con mas de 7 dias", "Recomiendo enviar cobranza WhatsApp", "Recomiendo limitar bolsa premium"],
+    },
   },
-  driver: {
-    prompt: "Cuanto gane esta semana?",
-    answer: ["Ganaste $5,480 MXN", "+18% respecto a la semana pasada", "Mejor zona: Aeropuerto CDMX", "Recomendacion: trabajar 5 PM - 8 PM"],
+  en: {
+    subtitle: "Mock operations assistant",
+    labels: { passenger: "Passenger", driver: "Driver", admin: "Admin" },
+    passenger: {
+      prompt: "I need to get to the airport tomorrow at 6 AM",
+      answer: ["Vehicle reserved", "Recommended departure: 4:55 AM", "Safe route: 98%", "Traffic analyzed", "Driver pre-assigned"],
+    },
+    driver: {
+      prompt: "How much did I earn this week?",
+      answer: ["You earned $5,480 MXN", "+18% versus last week", "Best zone: Mexico City Airport", "Recommendation: work 5 PM - 8 PM"],
+    },
+    admin: {
+      prompt: "Who has not paid their monthly subscription?",
+      answer: ["25 partners have overdue payments", "8 are more than 7 days late", "Recommend WhatsApp collections", "Recommend limiting premium marketplace access"],
+    },
   },
-  admin: {
-    prompt: "Quien no ha pagado su mensualidad?",
-    answer: ["25 socios con pagos vencidos", "8 con mas de 7 dias", "Recomiendo enviar cobranza WhatsApp", "Recomiendo limitar bolsa premium"],
+  fr: {
+    subtitle: "Assistant operationnel mock",
+    labels: { passenger: "Utilisateur", driver: "Chauffeur", admin: "Admin" },
+    passenger: {
+      prompt: "Je dois aller a l'aeroport demain a 6 h",
+      answer: ["Vehicule reserve", "Depart recommande: 4:55", "Itineraire sur: 98%", "Trafic analyse", "Chauffeur pre-assigne"],
+    },
+    driver: {
+      prompt: "Combien ai-je gagne cette semaine?",
+      answer: ["Vous avez gagne $5,480 MXN", "+18% par rapport a la semaine derniere", "Meilleure zone: Aeroport CDMX", "Recommandation: travailler de 17 h a 20 h"],
+    },
+    admin: {
+      prompt: "Qui n'a pas paye son abonnement mensuel?",
+      answer: ["25 partenaires ont des paiements en retard", "8 ont plus de 7 jours de retard", "Recommandation: recouvrement WhatsApp", "Recommandation: limiter la bourse premium"],
+    },
   },
 };
 
-type Mode = keyof typeof presets;
+type Mode = "passenger" | "driver" | "admin";
 
 export default function OliviaAI({ defaultMode = "passenger" as Mode, compact = false }) {
   const [mode, setMode] = useState<Mode>(defaultMode);
-  const current = presets[mode];
+  const { language } = useLanguage();
+  const content = pick(presets, language);
+  const current = content[mode];
 
   return (
     <div className="glass-card rounded-3xl p-5">
@@ -31,21 +70,21 @@ export default function OliviaAI({ defaultMode = "passenger" as Mode, compact = 
           </span>
           <div>
             <p className="font-black">Olivia Mobility AI</p>
-            <p className="text-sm text-city-muted">Asistente operativo mock</p>
+            <p className="text-sm text-city-muted">{content.subtitle}</p>
           </div>
         </div>
         <Sparkles className="text-city-cyan" size={20} />
       </div>
       <div className="mt-5 flex flex-wrap gap-2">
-        {Object.entries(presets).map(([key, preset]) => (
+        {(["passenger", "driver", "admin"] as Mode[]).map((key) => (
           <button
             key={key}
-            onClick={() => setMode(key as Mode)}
+            onClick={() => setMode(key)}
             className={`rounded-full border px-3 py-2 text-xs font-bold transition ${
               mode === key ? "border-city-cyan bg-city-cyan/15 text-white" : "border-slate-600/50 text-slate-300 hover:bg-slate-800"
             }`}
           >
-            {key === "passenger" ? "Usuario" : key === "driver" ? "Conductor" : "Admin"}
+            {content.labels[key]}
           </button>
         ))}
       </div>

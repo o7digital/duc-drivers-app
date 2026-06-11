@@ -1,8 +1,31 @@
+import { pick, useLanguage } from "../i18n";
+
+const copy = {
+  es: {
+    title: "Prediccion de demanda",
+    subtitle: "Zonas con mayor oportunidad en las proximas 3 horas",
+    zones: ["AICM +32%", "Polanco +18%", "Estadio Azteca evento"],
+  },
+  en: {
+    title: "Demand forecast",
+    subtitle: "Highest opportunity zones in the next 3 hours",
+    zones: ["AICM +32%", "Polanco +18%", "Estadio Azteca event"],
+  },
+  fr: {
+    title: "Prediction de demande",
+    subtitle: "Zones avec la plus forte opportunite dans les 3 prochaines heures",
+    zones: ["AICM +32%", "Polanco +18%", "Evenement Stade Azteca"],
+  },
+};
+
 export default function DemandForecast() {
+  const { language } = useLanguage();
+  const content = pick(copy, language);
+
   return (
     <div className="glass-card rounded-3xl p-5">
-      <h3 className="text-xl font-black tracking-tight">Prediccion de demanda</h3>
-      <p className="mt-1 text-sm text-city-muted">Zonas con mayor oportunidad en las proximas 3 horas</p>
+      <h3 className="text-xl font-black tracking-tight">{content.title}</h3>
+      <p className="mt-1 text-sm text-city-muted">{content.subtitle}</p>
       <div className="mt-5 h-40 rounded-3xl border border-slate-700/50 bg-slate-950/50 p-4">
         <svg viewBox="0 0 500 150" className="h-full w-full">
           <path d="M0 116 C80 88 112 96 170 62 C230 28 276 48 330 32 C392 14 430 38 500 18" fill="none" stroke="#22D3EE" strokeWidth="5" />
@@ -10,7 +33,7 @@ export default function DemandForecast() {
         </svg>
       </div>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        {["AICM +32%", "Polanco +18%", "Estadio Azteca evento"].map((item) => (
+        {content.zones.map((item) => (
           <span key={item} className="rounded-2xl border border-city-cyan/20 bg-city-cyan/5 px-4 py-3 text-sm font-bold">{item}</span>
         ))}
       </div>

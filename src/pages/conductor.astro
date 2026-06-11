@@ -1,15 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import DriverSocioPortal from "../components/DriverSocioPortal";
+import PageIntro from "../components/PageIntro";
 ---
 
 <Layout title="Mobility OS Mexico - Portal Socio">
-  <main class="container-page pt-14">
-    <span class="chip rounded-full px-4 py-2">Conductor / Socio</span>
-    <h1 class="mt-5 max-w-5xl text-5xl font-black leading-none tracking-tighter md:text-7xl">Socios con cuenta, mensualidad y oportunidades reales.</h1>
-    <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
-      Carlos Hernandez, socio #1284, administra ganancias, documentos, vehiculo, estado de cuenta y bolsa de servicios premium.
-    </p>
-  </main>
+  <PageIntro client:load page="conductor" />
   <DriverSocioPortal client:load />
 </Layout>
