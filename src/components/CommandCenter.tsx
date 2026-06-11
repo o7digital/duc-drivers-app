@@ -13,7 +13,7 @@ const copy = {
   es: {
     filters: ["Hoy", "Semana", "Mes"],
     chip: "Operacion nacional",
-    title: "Mobility Command Center",
+    title: "Taxifacil por DUcDrivers Financial",
     subtitle: "Control operativo para socios, viajes activos, cobranza, demanda, flota, reportes y asistencia AI.",
     kpis: [
       ["Ingresos hoy", "$284,450 MXN", "+21% vs ayer"],
@@ -33,7 +33,7 @@ const copy = {
   en: {
     filters: ["Today", "Week", "Month"],
     chip: "National operation",
-    title: "Mobility Command Center",
+    title: "Taxifacil por DUcDrivers Financial",
     subtitle: "Operational control for partners, active trips, collections, demand, fleet, reports and AI assistance.",
     kpis: [
       ["Revenue today", "$284,450 MXN", "+21% vs yesterday"],
@@ -53,7 +53,7 @@ const copy = {
   fr: {
     filters: ["Aujourd'hui", "Semaine", "Mois"],
     chip: "Operation nationale",
-    title: "Mobility Command Center",
+    title: "Taxifacil por DUcDrivers Financial",
     subtitle: "Controle operationnel des partenaires, trajets actifs, recouvrement, demande, flotte, rapports et assistance AI.",
     kpis: [
       ["Revenus du jour", "$284,450 MXN", "+21% vs hier"],

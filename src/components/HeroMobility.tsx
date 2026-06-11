@@ -6,8 +6,8 @@ import SmartCityMap from "./SmartCityMap";
 const copy = {
   es: {
     chip: "Smart City · Mexico · Mundial 2026",
-    title: "Mobility OS",
-    country: "Mexico",
+    title: "Taxifacil",
+    country: "por DUcDrivers Financial",
     subtitle: "La plataforma inteligente para cooperativas, agencias de taxi, transporte ejecutivo, aeropuertos, turismo y Mundial 2026.",
     userCta: "Ver experiencia usuario",
     driverCta: "Ver portal socio",
@@ -15,8 +15,8 @@ const copy = {
   },
   en: {
     chip: "Smart City · Mexico · World Cup 2026",
-    title: "Mobility OS",
-    country: "Mexico",
+    title: "Taxifacil",
+    country: "por DUcDrivers Financial",
     subtitle: "The intelligent platform for cooperatives, taxi agencies, executive transportation, airports, tourism and World Cup 2026.",
     userCta: "View passenger experience",
     driverCta: "View partner portal",
@@ -24,8 +24,8 @@ const copy = {
   },
   fr: {
     chip: "Smart City · Mexique · Coupe du Monde 2026",
-    title: "Mobility OS",
-    country: "Mexico",
+    title: "Taxifacil",
+    country: "por DUcDrivers Financial",
     subtitle: "La plateforme intelligente pour cooperatives, agences de taxi, transport executif, aeroports, tourisme et Coupe du Monde 2026.",
     userCta: "Voir l'experience utilisateur",
     driverCta: "Voir le portail partenaire",

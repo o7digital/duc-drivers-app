@@ -1,4 +1,4 @@
-# Mobility OS Mexico
+# Taxifacil por DUcDrivers Financial
 
 Demo premium interactiva para una plataforma mexicana de movilidad orientada a cooperativas, agencias de taxi, transporte ejecutivo, aeropuertos, turismo y Mundial 2026.
 
@@ -17,7 +17,7 @@ Demo premium interactiva para una plataforma mexicana de movilidad orientada a c
 - `/` Landing y demo hub
 - `/usuario` Experiencia pasajero
 - `/conductor` Portal conductor / socio
-- `/control` Mobility Command Center
+- `/control` Taxifacil por DUcDrivers Financial
 
 ## Instalacion
 
