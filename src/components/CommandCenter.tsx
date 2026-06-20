@@ -7,6 +7,7 @@ import DemandForecast from "./DemandForecast";
 import CollectionsPanel from "./CollectionsPanel";
 import WorldCupMode from "./WorldCupMode";
 import ServiceMarketplace from "./ServiceMarketplace";
+import BusinessFleetAccess from "./BusinessFleetAccess";
 import { pick, useLanguage } from "../i18n";
 
 const copy = {
@@ -111,6 +112,9 @@ export default function CommandCenter() {
       <div className="mt-5 grid gap-5 xl:grid-cols-2">
         <DemandForecast />
         <ServiceMarketplace />
+      </div>
+      <div className="mt-5">
+        <BusinessFleetAccess />
       </div>
       <div className="mt-5 grid gap-5 xl:grid-cols-3">
         <div className="glass-card rounded-3xl p-5">

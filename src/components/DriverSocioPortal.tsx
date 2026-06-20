@@ -3,6 +3,8 @@ import PhoneMockup from "./PhoneMockup";
 import AccountStatement from "./AccountStatement";
 import OliviaAI from "./OliviaAI";
 import ServiceMarketplace from "./ServiceMarketplace";
+import DriverKmPricing from "./DriverKmPricing";
+import PackageSection from "./PackageSection";
 import { pick, useLanguage } from "../i18n";
 
 const copy = {
@@ -98,6 +100,10 @@ export default function DriverSocioPortal() {
         <div className="grid gap-5 xl:grid-cols-2">
           <AccountStatement />
           <OliviaAI defaultMode="driver" compact />
+        </div>
+        <div className="grid gap-5 xl:grid-cols-2">
+          <DriverKmPricing />
+          <PackageSection />
         </div>
         <ServiceMarketplace />
       </div>
