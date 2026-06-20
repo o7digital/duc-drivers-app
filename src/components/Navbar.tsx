@@ -1,22 +1,22 @@
 import { useState } from "react";
-import { Activity, CarFront, Command, Globe2, Menu, UserRound, X } from "lucide-react";
+import { Activity, CarFront, Command, Globe2, Menu, Package, UserRound, X } from "lucide-react";
 import { languages, pick, useLanguage } from "../i18n";
 
 const copy = {
   es: {
     openMenu: "Abrir menu",
     closeMenu: "Cerrar menu",
-    links: ["Landing", "Usuario", "Socio", "Control Center"],
+    links: ["Landing", "Usuario", "Socio", "Packaging", "Control Center"],
   },
   en: {
     openMenu: "Open menu",
     closeMenu: "Close menu",
-    links: ["Landing", "Passenger", "Partner", "Control Center"],
+    links: ["Landing", "Passenger", "Partner", "Packaging", "Control Center"],
   },
   fr: {
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
-    links: ["Accueil", "Utilisateur", "Partenaire", "Control Center"],
+    links: ["Accueil", "Utilisateur", "Partenaire", "Packaging", "Control Center"],
   },
 };
 
@@ -24,6 +24,7 @@ const links = [
   { href: "/", icon: Activity },
   { href: "/usuario", icon: UserRound },
   { href: "/conductor", icon: CarFront },
+  { href: "/packaging", icon: Package },
   { href: "/control", icon: Command },
 ];
 

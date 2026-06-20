@@ -28,6 +28,7 @@ const copy = {
     ],
     activeTrips: "Viajes activos",
     topDrivers: "Top conductores",
+    packaging: "Abrir Packaging",
     trips: ["Polanco → AICM T2", "Roma → Estadio Azteca", "Santa Fe → Reforma"],
     drivers: ["Jose Luis Martinez · 4.9", "Carlos Hernandez · 4.9", "Patricia Gomez · 4.8"],
   },
@@ -48,6 +49,7 @@ const copy = {
     ],
     activeTrips: "Active trips",
     topDrivers: "Top drivers",
+    packaging: "Open Packaging",
     trips: ["Polanco → AICM T2", "Roma → Estadio Azteca", "Santa Fe → Reforma"],
     drivers: ["Jose Luis Martinez · 4.9", "Carlos Hernandez · 4.9", "Patricia Gomez · 4.8"],
   },
@@ -68,6 +70,7 @@ const copy = {
     ],
     activeTrips: "Trajets actifs",
     topDrivers: "Top chauffeurs",
+    packaging: "Ouvrir Packaging",
     trips: ["Polanco → AICM T2", "Roma → Stade Azteca", "Santa Fe → Reforma"],
     drivers: ["Jose Luis Martinez · 4.9", "Carlos Hernandez · 4.9", "Patricia Gomez · 4.8"],
   },
@@ -115,6 +118,11 @@ export default function CommandCenter() {
       </div>
       <div className="mt-5">
         <BusinessFleetAccess />
+      </div>
+      <div className="mt-5">
+        <a href="/packaging" className="inline-flex min-h-11 items-center rounded-2xl bg-city-cyan px-5 text-sm font-black text-slate-950">
+          {content.packaging}
+        </a>
       </div>
       <div className="mt-5 grid gap-5 xl:grid-cols-3">
         <div className="glass-card rounded-3xl p-5">
