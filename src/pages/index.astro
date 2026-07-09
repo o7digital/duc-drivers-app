@@ -1,10 +1,630 @@
----
-import Layout from "../layouts/Layout.astro";
-import HeroMobility from "../components/HeroMobility";
-import LandingContent from "../components/LandingContent";
----
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DUC Drivers MobilityOS — Preview V4 Olivia AI</title>
+  <style>
+    :root{
+      --bg:#050711;
+      --bg2:#080d1e;
+      --panel:rgba(255,255,255,.074);
+      --panel2:rgba(255,255,255,.115);
+      --panel3:rgba(255,255,255,.16);
+      --line:rgba(255,255,255,.14);
+      --line2:rgba(255,255,255,.22);
+      --text:#f7f9ff;
+      --soft:#dfe6ff;
+      --muted:#a8b1cf;
+      --muted2:#7f8aaa;
+      --gold:#ffd176;
+      --green:#37e7a1;
+      --blue:#70a7ff;
+      --cyan:#63e8ff;
+      --violet:#a785ff;
+      --pink:#ff79b8;
+      --orange:#ff9b63;
+      --red:#ff647d;
+      --shadow:0 28px 90px rgba(0,0,0,.50);
+      --shadow2:0 18px 54px rgba(0,0,0,.34);
+      --radius:30px;
+      --radius2:22px;
+      --radius3:16px;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 9% 6%, rgba(102,72,255,.50), transparent 32%),
+        radial-gradient(circle at 88% 8%, rgba(55,231,161,.22), transparent 31%),
+        radial-gradient(circle at 58% 96%, rgba(255,209,118,.15), transparent 34%),
+        linear-gradient(145deg,#03050c,#081127 43%,#050711);
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image:
+        linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), transparent 84%);
+    }
+    body:after{
+      content:"";
+      position:fixed; inset:auto -12% -25% -12%; height:52vh; pointer-events:none; z-index:-1;
+      background:radial-gradient(ellipse at center, rgba(99,232,255,.12), transparent 58%);
+      filter:blur(8px);
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .shell{width:min(1480px,calc(100% - 36px)); margin:0 auto; padding:22px 0 80px}
+    .topbar{
+      position:sticky; top:14px; z-index:50;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:12px 14px; border:1px solid var(--line);
+      border-radius:999px; background:rgba(5,7,17,.72); backdrop-filter:blur(24px);
+      box-shadow:var(--shadow2);
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:max-content}
+    .logo{
+      width:44px;height:44px;border-radius:15px;display:grid;place-items:center;font-weight:1000;letter-spacing:-.08em;
+      background:linear-gradient(135deg,var(--gold),var(--orange) 45%,var(--pink)); color:#11101a;
+      box-shadow:0 12px 34px rgba(255,209,118,.25);
+    }
+    .brand-title{font-weight:900;letter-spacing:-.04em;line-height:1}
+    .brand-sub{font-size:12px;color:var(--muted);margin-top:3px}
+    .nav{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+    .nav a{
+      padding:10px 12px;border:1px solid transparent;border-radius:999px;color:var(--muted);font-size:13px;font-weight:800;
+    }
+    .nav a:hover{color:var(--text);border-color:var(--line);background:rgba(255,255,255,.06)}
+    .top-actions{display:flex;align-items:center;gap:8px;min-width:max-content}
+    .lang{display:flex;gap:5px;border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:999px;padding:5px}
+    .lang span{font-size:11px;color:var(--muted);font-weight:900;padding:5px 7px;border-radius:999px}
+    .lang span:first-child{background:rgba(255,255,255,.12);color:var(--text)}
+    .btn{
+      border:0; cursor:pointer; color:#0b0b11; font-weight:950;
+      border-radius:999px; padding:12px 16px;
+      background:linear-gradient(135deg,var(--gold),var(--green));
+      box-shadow:0 16px 38px rgba(55,231,161,.16);
+      white-space:nowrap;
+    }
+    .btn.dark{color:var(--text);background:rgba(255,255,255,.08);border:1px solid var(--line);box-shadow:none}
+    .btn.blue{background:linear-gradient(135deg,var(--cyan),var(--blue));}
 
-<Layout title="Taxifacil por DUcDrivers Financial - Demo">
-  <HeroMobility client:load />
-  <LandingContent client:load />
-</Layout>
+    .hero{display:grid;grid-template-columns:1.04fr .96fr; gap:26px; align-items:stretch; padding:70px 0 32px}
+    .hero-copy{padding:38px;border-radius:var(--radius);border:1px solid var(--line);background:linear-gradient(155deg, rgba(255,255,255,.095), rgba(255,255,255,.045));box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero-copy:before{content:"";position:absolute;inset:-38% auto auto 40%;width:74%;height:88%;background:radial-gradient(circle,rgba(255,209,118,.18),transparent 60%);filter:blur(10px)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);font-size:12px;text-transform:uppercase;letter-spacing:.11em;color:var(--soft);font-weight:1000}
+    h1{font-size:clamp(44px,6.7vw,98px);line-height:.88;margin:26px 0 22px;letter-spacing:-.085em;max-width:980px}
+    .gradient{background:linear-gradient(115deg,var(--gold),#fff 38%,var(--cyan) 68%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:clamp(18px,2.2vw,25px);color:var(--soft);line-height:1.42;max-width:820px;margin:0 0 26px}
+    .lead strong{color:#fff}
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+    .hero-pills{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+    .pill-card{padding:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.065)}
+    .pill-card b{display:block;font-size:21px;letter-spacing:-.04em;margin-bottom:4px}.pill-card span{font-size:12px;color:var(--muted);font-weight:800}.pill-card small{display:block;color:var(--green);font-weight:950;margin-top:8px;font-size:12px}
+
+    .hero-stage{position:relative;min-height:710px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.045));box-shadow:var(--shadow);overflow:hidden;padding:24px}
+    .hero-stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 17%,rgba(99,232,255,.22),transparent 38%), radial-gradient(circle at 20% 90%,rgba(255,121,184,.18),transparent 35%)}
+    .orb{position:absolute;border-radius:50%;filter:blur(.2px);opacity:.9}.orb.one{width:90px;height:90px;background:rgba(255,209,118,.23);right:36px;top:72px}.orb.two{width:130px;height:130px;background:rgba(55,231,161,.15);left:35px;bottom:90px}.orb.three{width:66px;height:66px;background:rgba(167,133,255,.24);right:120px;bottom:160px}
+    .phone-stack{position:relative;z-index:2;height:100%;display:grid;place-items:center}
+    .phone{
+      width:min(350px,80vw);height:640px;border:1px solid rgba(255,255,255,.20);border-radius:48px;background:#070b17;box-shadow:0 48px 110px rgba(0,0,0,.55);padding:13px;position:relative;
+      transform:rotate(-3deg);animation:floaty 7s ease-in-out infinite;
+    }
+    @keyframes floaty{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-1deg) translateY(-10px)}}
+    .phone:before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:112px;height:25px;border-radius:0 0 18px 18px;background:#050711;z-index:4}
+    .screen{height:100%;border-radius:38px;background:linear-gradient(180deg,#121a32,#070a14 48%,#0b1022);overflow:hidden;position:relative;padding:26px 17px 18px}
+    .screen-map{position:absolute;inset:0;opacity:.38;background:
+      linear-gradient(32deg,transparent 0 46%,rgba(255,255,255,.12) 47% 48%,transparent 49%),
+      linear-gradient(122deg,transparent 0 42%,rgba(255,255,255,.11) 43% 44%,transparent 45%),
+      radial-gradient(circle at 40% 40%,rgba(99,232,255,.35),transparent 15%),
+      radial-gradient(circle at 70% 63%,rgba(55,231,161,.25),transparent 13%);
+      background-size:100% 100%,100% 100%,100% 100%,100% 100%}
+    .screen-content{position:relative;z-index:2}.phone-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.tiny-logo{display:flex;gap:8px;align-items:center;font-weight:950}.tiny-logo i{width:28px;height:28px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--pink));display:block}.status{font-size:11px;color:var(--green);font-weight:1000;padding:6px 8px;background:rgba(55,231,161,.12);border:1px solid rgba(55,231,161,.22);border-radius:999px}
+    .service-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.service-tabs span{font-size:11px;text-align:center;font-weight:950;padding:9px 6px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--muted)}.service-tabs span:first-child{background:linear-gradient(135deg,var(--gold),var(--green));color:#071014;border:0}
+    .ride-card{margin-top:14px;border:1px solid var(--line);background:rgba(255,255,255,.09);border-radius:24px;padding:14px}.ride-line{display:flex;gap:10px;align-items:center;padding:10px 0}.dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(55,231,161,.12)}.dot.end{background:var(--pink);box-shadow:0 0 0 5px rgba(255,121,184,.11)}.ride-line div{font-size:12px;color:var(--muted)}.ride-line b{display:block;font-size:14px;color:var(--text);margin-top:2px}.route{height:52px;width:2px;background:linear-gradient(var(--green),var(--pink));margin-left:5px;opacity:.75}
+    .fare-box{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.fare-box div{border:1px solid var(--line);background:rgba(255,255,255,.07);padding:12px;border-radius:18px}.fare-box span{display:block;color:var(--muted);font-size:11px;font-weight:800}.fare-box b{font-size:19px;letter-spacing:-.03em}.confirm{margin-top:14px;padding:13px;border-radius:18px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#061020;text-align:center;font-weight:1000}.mini-stack{position:absolute;right:24px;bottom:26px;display:grid;gap:10px;z-index:4;width:210px}.mini-floating{border:1px solid var(--line);border-radius:20px;background:rgba(5,7,17,.72);backdrop-filter:blur(18px);padding:12px;box-shadow:var(--shadow2)}.mini-floating strong{display:block;font-size:13px}.mini-floating span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.mini-floating b{color:var(--green)}
+
+    .section{padding:34px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:18px}.section-head h2{font-size:clamp(32px,4.7vw,66px);letter-spacing:-.07em;line-height:.92;margin:0;max-width:850px}.section-head p{color:var(--muted);font-size:17px;line-height:1.45;max-width:520px;margin:0}.grid{display:grid;gap:18px}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}.cols-2{grid-template-columns:repeat(2,1fr)}
+    .card{border:1px solid var(--line);border-radius:var(--radius2);background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.045));box-shadow:var(--shadow2);padding:22px;position:relative;overflow:hidden}.card:hover{border-color:rgba(255,255,255,.26);transform:translateY(-2px);transition:.25s ease}.card h3{font-size:24px;letter-spacing:-.04em;margin:0 0 10px}.card p{color:var(--muted);line-height:1.45;margin:0}.card .icon{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.09);border:1px solid var(--line);font-size:22px;margin-bottom:18px}.tag{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:rgba(255,255,255,.065);padding:7px 10px;border-radius:999px;font-size:12px;color:var(--soft);font-weight:900}.tag.green{color:#cffff0;background:rgba(55,231,161,.11);border-color:rgba(55,231,161,.2)}.tag.gold{color:#fff1c5;background:rgba(255,209,118,.11);border-color:rgba(255,209,118,.22)}.tag.blue{color:#d8ecff;background:rgba(112,167,255,.11);border-color:rgba(112,167,255,.22)}
+
+    .user-lab{display:grid;grid-template-columns:.96fr 1.04fr;gap:18px}.use-case-list{display:grid;gap:12px}.use-case{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.06);padding:16px}.use-case b{display:block;font-size:17px;margin-bottom:4px}.use-case span{color:var(--muted);line-height:1.36;font-size:14px}.use-case em{font-style:normal;min-width:42px;height:42px;border-radius:15px;background:rgba(255,255,255,.09);display:grid;place-items:center;border:1px solid var(--line)}
+    .mobile-preview{border-radius:30px;padding:20px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.045));min-height:560px;position:relative;overflow:hidden}.city-radar{position:absolute;inset:20px;border-radius:26px;background:
+      radial-gradient(circle at 55% 34%, rgba(55,231,161,.32), transparent 8%),
+      radial-gradient(circle at 28% 62%, rgba(255,121,184,.24), transparent 9%),
+      radial-gradient(circle at 72% 72%, rgba(112,167,255,.24), transparent 9%),
+      linear-gradient(32deg, transparent 0 44%, rgba(255,255,255,.10) 45% 46%, transparent 47%),
+      linear-gradient(126deg, transparent 0 38%, rgba(255,255,255,.09) 39% 40%, transparent 41%);
+      opacity:.72}.booking-panel{position:absolute;left:38px;right:38px;bottom:36px;border:1px solid var(--line2);border-radius:28px;background:rgba(5,7,17,.78);backdrop-filter:blur(22px);padding:18px;box-shadow:var(--shadow2)}.booking-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.booking-tabs span{border:1px solid var(--line);border-radius:16px;padding:10px;text-align:center;color:var(--muted);font-weight:950;font-size:12px;background:rgba(255,255,255,.06)}.booking-tabs span.active{color:#051018;background:linear-gradient(135deg,var(--gold),var(--green));border:0}.booking-row{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:13px 0}.booking-row:first-of-type{border-top:0}.booking-row span{color:var(--muted);font-size:13px}.booking-row b{letter-spacing:-.03em}.safety-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.safety-strip div{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.06);padding:10px;text-align:center;font-size:12px;color:var(--soft);font-weight:850}.avatar-car{position:absolute;width:78px;height:44px;border-radius:18px;background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 16px 40px rgba(112,167,255,.24)}.avatar-car:before,.avatar-car:after{content:"";position:absolute;bottom:-7px;width:16px;height:16px;background:#0a1020;border-radius:50%;border:3px solid rgba(255,255,255,.5)}.avatar-car:before{left:13px}.avatar-car:after{right:13px}.avatar-car.one{left:54%;top:31%;transform:rotate(-18deg)}.avatar-car.two{left:23%;top:61%;transform:rotate(14deg);background:linear-gradient(135deg,var(--gold),var(--orange))}.avatar-car.three{right:13%;top:69%;transform:rotate(-4deg);background:linear-gradient(135deg,var(--green),var(--cyan))}
+
+    .vehicle-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}.vehicle{min-height:270px;display:flex;flex-direction:column;justify-content:space-between}.vehicle-visual{height:86px;border-radius:24px;margin:8px 0 18px;position:relative;border:1px solid var(--line);background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));overflow:hidden}.vehicle-visual:before{content:"";position:absolute;left:18%;right:18%;bottom:22px;height:34px;border-radius:22px 22px 9px 9px;background:linear-gradient(135deg,var(--cyan),var(--blue))}.vehicle:nth-child(2) .vehicle-visual:before{background:linear-gradient(135deg,var(--gold),var(--orange))}.vehicle:nth-child(3) .vehicle-visual:before{background:linear-gradient(135deg,var(--green),var(--cyan))}.vehicle-visual:after{content:"";position:absolute;left:26%;right:26%;bottom:14px;height:14px;border-radius:999px;background:rgba(0,0,0,.35);filter:blur(8px)}.checklist{display:grid;gap:9px;margin-top:14px}.checklist div{display:flex;gap:9px;color:var(--soft);font-size:14px}.checklist div:before{content:"✓";color:var(--green);font-weight:1000}
+
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.plan{padding:24px;border-radius:28px;border:1px solid var(--line);background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.045));position:relative;overflow:hidden}.plan.featured{border-color:rgba(255,209,118,.45);background:linear-gradient(155deg,rgba(255,209,118,.14),rgba(255,255,255,.055));box-shadow:0 26px 90px rgba(255,209,118,.1)}.plan .top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.price{font-size:42px;letter-spacing:-.08em;font-weight:1000;margin:16px 0 0}.price small{font-size:14px;color:var(--muted);letter-spacing:0}.plan ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}.plan li{color:var(--soft);line-height:1.35;display:flex;gap:9px}.plan li:before{content:"•";color:var(--green);font-weight:1000}.plan .btn{width:100%;margin-top:22px;text-align:center;display:block}.addons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}.addon{padding:18px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.058)}.addon b{display:block;margin-bottom:6px}.addon span{color:var(--muted);font-size:13px;line-height:1.35;display:block}
+
+    .package-section{display:grid;grid-template-columns:1fr 1fr;gap:18px}.timeline{display:grid;gap:13px}.step{display:grid;grid-template-columns:48px 1fr;gap:13px;align-items:flex-start}.step-num{width:48px;height:48px;border-radius:17px;background:rgba(255,255,255,.08);border:1px solid var(--line);display:grid;place-items:center;font-weight:1000;color:var(--gold)}.step b{display:block;font-size:18px;margin-bottom:4px}.step span{color:var(--muted);font-size:14px;line-height:1.38}.package-card{min-height:430px}.package-map{height:245px;border:1px solid var(--line);border-radius:26px;margin-top:18px;position:relative;background:
+      radial-gradient(circle at 24% 28%,rgba(55,231,161,.33),transparent 9%),
+      radial-gradient(circle at 73% 64%,rgba(255,121,184,.28),transparent 10%),
+      linear-gradient(30deg,transparent 0 46%,rgba(255,255,255,.12) 47% 48%,transparent 49%),
+      linear-gradient(120deg,transparent 0 42%,rgba(255,255,255,.1) 43% 44%,transparent 45%),
+      rgba(255,255,255,.045);overflow:hidden}.route-curve{position:absolute;left:25%;top:32%;width:47%;height:42%;border:3px dashed rgba(99,232,255,.72);border-left:0;border-bottom:0;border-radius:0 40px 0 0;transform:rotate(8deg)}.pin{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--green);box-shadow:0 0 0 8px rgba(55,231,161,.14)}.pin.end{background:var(--pink);box-shadow:0 0 0 8px rgba(255,121,184,.14)}.pin.a{left:22%;top:27%}.pin.b{right:23%;bottom:27%}.pod{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.pod div{padding:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.06);font-size:12px;color:var(--soft);font-weight:850;text-align:center}
+
+    .fleet-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:18px}.control-panel{min-height:640px}.dashboard-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.segmented{display:flex;gap:6px;background:rgba(255,255,255,.055);border:1px solid var(--line);padding:5px;border-radius:999px}.segmented span{font-size:12px;color:var(--muted);font-weight:950;padding:8px 10px;border-radius:999px}.segmented span.active{background:rgba(255,255,255,.14);color:var(--text)}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.058);padding:16px}.kpi span{color:var(--muted);font-size:12px;font-weight:850}.kpi b{display:block;font-size:28px;letter-spacing:-.06em;margin-top:6px}.kpi small{color:var(--green);font-weight:950}.ops-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.ops-card{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.055);padding:16px}.ops-card h4{margin:0 0 12px;font-size:16px}.bar-row{display:grid;grid-template-columns:82px 1fr 48px;gap:10px;align-items:center;margin:10px 0}.bar-row span,.bar-row small{color:var(--muted);font-size:12px}.bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--cyan))}.live-list{display:grid;gap:10px}.live-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045);padding:12px}.live-item b{font-size:13px}.live-item span{color:var(--muted);font-size:12px}.status-dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(55,231,161,.12)}.status-dot.warn{background:var(--gold);box-shadow:0 0 0 5px rgba(255,209,118,.12)}.status-dot.red{background:var(--red);box-shadow:0 0 0 5px rgba(255,100,125,.12)}
+    .fleet-map{min-height:640px;position:relative}.map-large{position:absolute;inset:20px;border:1px solid var(--line);border-radius:28px;background:
+      radial-gradient(circle at 54% 38%,rgba(55,231,161,.28),transparent 10%),
+      radial-gradient(circle at 30% 68%,rgba(255,209,118,.23),transparent 10%),
+      radial-gradient(circle at 76% 63%,rgba(112,167,255,.24),transparent 11%),
+      linear-gradient(30deg,transparent 0 44%,rgba(255,255,255,.1) 45% 46%,transparent 47%),
+      linear-gradient(115deg,transparent 0 40%,rgba(255,255,255,.09) 41% 42%,transparent 43%),
+      linear-gradient(0deg,rgba(255,255,255,.04),rgba(255,255,255,.02));overflow:hidden}.fleet-bubble{position:absolute;border:1px solid var(--line);background:rgba(5,7,17,.73);backdrop-filter:blur(18px);border-radius:18px;padding:10px 12px;box-shadow:var(--shadow2)}.fleet-bubble b{display:block;font-size:13px}.fleet-bubble span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.fleet-bubble.a{left:10%;top:17%}.fleet-bubble.b{right:9%;top:35%}.fleet-bubble.c{left:16%;bottom:18%}.fleet-bubble.d{right:13%;bottom:16%}.fleet-car{position:absolute;width:36px;height:24px;border-radius:11px;background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 10px 30px rgba(112,167,255,.25)}.fleet-car:nth-child(2n){background:linear-gradient(135deg,var(--gold),var(--orange))}.fleet-car:nth-child(3n){background:linear-gradient(135deg,var(--green),var(--cyan))}
+
+    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare-card{padding:24px;border-radius:28px;border:1px solid var(--line);background:rgba(255,255,255,.055)}.compare-card.duc{border-color:rgba(55,231,161,.34);background:linear-gradient(155deg,rgba(55,231,161,.13),rgba(255,255,255,.045))}.compare-card h3{font-size:30px;letter-spacing:-.05em;margin:0 0 16px}.compare-list{display:grid;gap:12px}.compare-list div{display:flex;gap:10px;color:var(--soft)}.compare-list div:before{content:"—";color:var(--muted);font-weight:1000}.duc .compare-list div:before{content:"✓";color:var(--green)}
+
+    .final-cta{margin-top:34px;border:1px solid rgba(255,209,118,.26);border-radius:36px;background:linear-gradient(135deg,rgba(255,209,118,.16),rgba(99,232,255,.10),rgba(255,255,255,.045));box-shadow:var(--shadow);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}.final-cta h2{font-size:clamp(34px,4.8vw,70px);letter-spacing:-.07em;line-height:.92;margin:0}.final-cta p{color:var(--soft);font-size:18px;max-width:820px;line-height:1.45}.final-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .note{color:var(--muted2);font-size:12px;line-height:1.45;margin-top:16px}
+
+    @media (max-width:1180px){.hero,.user-lab,.package-section,.fleet-layout,.comparison,.final-cta{grid-template-columns:1fr}.hero-stage{min-height:680px}.hero-pills,.kpis,.addons{grid-template-columns:repeat(2,1fr)}.final-actions{justify-content:flex-start}.topbar{border-radius:28px;align-items:flex-start}.nav{display:none}}
+    @media (max-width:760px){.shell{width:min(100% - 22px,1480px);padding-top:12px}.topbar{position:relative;top:auto}.brand{min-width:0}.brand>div{min-width:0}.brand-title,.brand-sub{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.top-actions{display:none}.hero{padding-top:28px}.hero-copy{padding:24px}.hero-pills,.cols-3,.cols-4,.cols-2,.vehicle-grid,.plans,.addons,.kpis,.ops-grid,.pod{grid-template-columns:1fr}.hero-stage{min-height:660px;padding:14px}.phone{width:292px;height:580px}.mini-stack{display:none}.section-head{display:block}.section-head p{margin-top:12px}.booking-panel{left:20px;right:20px;bottom:20px}.fleet-map,.control-panel{min-height:560px}.final-cta{padding:24px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="DUC Drivers MobilityOS">
+        <div class="logo">DUC</div>
+        <div>
+          <div class="brand-title">DUC Drivers MobilityOS</div>
+          <div class="brand-sub">App usuario · Socio conductor · Paquetes · Flotillas · Control Center · Olivia AI</div>
+        </div>
+      </a>
+      <nav class="nav" aria-label="principal">
+        <a href="#usuario">Usuario</a>
+        <a href="#socios">Socios</a>
+        <a href="#paquetes">Paquetes</a>
+        <a href="#flotillas">Flotillas</a>
+        <a href="#control">Control Center</a>
+        <a href="#olivia">Olivia AI</a>
+        <a href="#planes">Planes</a>
+      </nav>
+      <div class="top-actions">
+        <div class="lang"><span>ES</span><span>EN</span><span>FR</span></div>
+        <a class="btn" href="#cta">Solicitar demo</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Nueva generación · Mobility + Financing + Logistics</span>
+          <h1>Más que una app de viajes. <span class="gradient">Una plataforma completa para mover México.</span></h1>
+          <p class="lead">
+            DUC conecta <strong>usuarios</strong>, <strong>socios conductores</strong>, <strong>envío de paquetes</strong>, <strong>flotillas</strong>, hoteles y empresas desde un solo Control Center. <strong>Olivia Mobility AI</strong> coordina demanda, seguridad, soporte, cobranza, fiscal y oportunidades premium. Para el socio: comisión clara desde 4%, vehículo, seguro, GPS, cámara y soporte fiscal.
+          </p>
+          <div class="hero-buttons">
+            <a class="btn" href="#usuario">Ver experiencia usuario</a>
+            <a class="btn dark" href="#socios">Ver propuesta socio conductor</a>
+            <a class="btn dark" href="#flotillas">Ver flotillas</a>
+          </div>
+          <div class="hero-pills">
+            <div class="pill-card"><b>4%</b><span>comisión por viaje</span><small>clara y competitiva</small></div>
+            <div class="pill-card"><b>499</b><span>MXN / mes</span><small>plan socio Basic</small></div>
+            <div class="pill-card"><b>3</b><span>líneas de negocio</span><small>viajes · paquetes · B2B</small></div>
+            <div class="pill-card"><b>360°</b><span>operación</span><small>control, flota y AI</small></div>
+          </div>
+          <p class="note">Mensaje financiero recomendado: “evaluación flexible según ingresos reales e historial operativo”. Opciones sujetas a evaluación y condiciones operativas.</p>
+        </div>
+
+        <div class="hero-stage" aria-label="mockup app usuario">
+          <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+          <div class="phone-stack">
+            <div class="phone">
+              <div class="screen">
+                <div class="screen-map"></div>
+                <div class="screen-content">
+                  <div class="phone-top">
+                    <div class="tiny-logo"><i></i><span>DUC</span></div>
+                    <div class="status">Seguro activo</div>
+                  </div>
+                  <div class="service-tabs"><span>Viaje</span><span>Paquete</span><span>Reserva</span></div>
+                  <div class="ride-card">
+                    <div class="ride-line"><span class="dot"></span><div>Origen<b>Polanco · CDMX</b></div></div>
+                    <div class="route"></div>
+                    <div class="ride-line"><span class="dot end"></span><div>Destino<b>AICM Terminal 2</b></div></div>
+                    <div class="fare-box">
+                      <div><span>Precio estimado</span><b>$328</b></div>
+                      <div><span>Socio asignado</span><b>4.9 ★</b></div>
+                    </div>
+                    <div class="safety-strip">
+                      <div>GPS live</div><div>Cámara</div><div>Seguro</div>
+                    </div>
+                    <div class="confirm">Confirmar viaje seguro</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mini-stack">
+              <div class="mini-floating"><strong>Paquete express</strong><span>Roma Norte → Santa Fe · <b>42 min</b></span></div>
+              <div class="mini-floating"><strong>Flotilla hotel</strong><span>12 taxis asignados · concierge activo</span></div>
+              <div class="mini-floating"><strong>Olivia Mobility AI</strong><span>Enviar 18 socios a AICM por pico de demanda.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="ecosistema">
+        <div class="section-head">
+          <h2>El producto no es “otra plataforma de viajes”. Es un <span class="gradient">ecosistema DUC.</span></h2>
+          <p>La fuerza está en mantener las dos caras: una app fácil para el usuario y una plataforma de crecimiento para el socio conductor.</p>
+        </div>
+        <div class="grid cols-4">
+          <article class="card"><div class="icon">🚕</div><h3>Viajes urbanos</h3><p>Usuario pide viaje, reserva, aeropuerto, eventos, seguridad, tracking y soporte multilingüe.</p></article>
+          <article class="card"><div class="icon">📦</div><h3>Envío de paquetes</h3><p>Mensajería express con evidencia de entrega, rutas optimizadas, seguro opcional y seguimiento en vivo.</p></article>
+          <article class="card"><div class="icon">🚘</div><h3>Socio + vehículo</h3><p>Renta semanal, opción a compra, unidades nuevas, seminuevas o reconstruidas certificadas.</p></article>
+          <article class="card"><div class="icon">🏢</div><h3>Flotillas B2B</h3><p>Hoteles, clínicas, eventos y empresas pueden asignar, supervisar y liquidar viajes desde portal propio.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="usuario">
+        <div class="section-head">
+          <h2>Se recupera la parte <span class="gradient">usuario / pasajero</span>.</h2>
+          <p>La app debe vender confianza: viaje, reserva, paquete, seguridad, factura y soporte. Eso es lo que no podemos perder.</p>
+        </div>
+        <div class="user-lab">
+          <div class="card">
+            <span class="tag blue">App Usuario</span>
+            <h3 style="font-size:38px;line-height:.98;margin-top:16px">Una experiencia simple para pedir, reservar y enviar.</h3>
+            <p>La pantalla de usuario no debe parecer solo taxi. Debe parecer “movilidad confiable”: viajes normales, aeropuerto, paquetes, viajes programados y servicios premium.</p>
+            <div class="use-case-list" style="margin-top:18px">
+              <div class="use-case"><em>1</em><div><b>Pedir viaje inmediato</b><span>Origen, destino, tarifa estimada, socio asignado, GPS live, botón de emergencia y soporte.</span></div></div>
+              <div class="use-case"><em>2</em><div><b>Reservar aeropuerto o evento</b><span>Programación anticipada para AICM, hoteles, estadios, conciertos, clínicas o corporativos.</span></div></div>
+              <div class="use-case"><em>3</em><div><b>Enviar paquete</b><span>El usuario puede mandar documentos, compras, refacciones o paquetes con prueba de entrega.</span></div></div>
+              <div class="use-case"><em>4</em><div><b>Factura y soporte</b><span>Soporte por Olivia AI, comprobantes, historial y asistencia multilingüe para turistas.</span></div></div>
+            </div>
+          </div>
+          <div class="mobile-preview">
+            <div class="city-radar"></div>
+            <div class="avatar-car one"></div><div class="avatar-car two"></div><div class="avatar-car three"></div>
+            <div class="booking-panel">
+              <div class="booking-tabs"><span class="active">Viaje</span><span>Paquete</span><span>Reserva</span></div>
+              <div class="booking-row"><span>Servicio</span><b>AICM · Premium seguro</b></div>
+              <div class="booking-row"><span>Socio</span><b>Patricia G. · 4.8 ★</b></div>
+              <div class="booking-row"><span>Seguridad</span><b>GPS + cámara + seguro</b></div>
+              <div class="booking-row"><span>Precio</span><b>$328 MXN</b></div>
+              <div class="safety-strip"><div>Compartir ruta</div><div>Emergencia</div><div>Factura</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="socios">
+        <div class="section-head">
+          <h2>Para el socio conductor: <span class="gradient">viajes + vehículo + crecimiento</span>.</h2>
+          <p>Este es el golpe fuerte contra las plataformas tradicionales: no solo das demanda, ayudas al socio a construir su herramienta de trabajo.</p>
+        </div>
+        <div class="vehicle-grid">
+          <article class="card vehicle">
+            <div><span class="tag green">Opción 01</span><div class="vehicle-visual"></div><h3>Auto nuevo</h3><p>Unidad nueva para socios con perfil más estable, ingresos comprobables y plan de crecimiento.</p></div>
+            <div class="checklist"><div>Renta semanal u opción a compra</div><div>Seguro amplio configurable</div><div>GPS y cámara opcional</div></div>
+          </article>
+          <article class="card vehicle">
+            <div><span class="tag gold">Opción 02</span><div class="vehicle-visual"></div><h3>Seminuevo</h3><p>Mejor equilibrio para arrancar rápido: costo menor, unidad validada y operación inmediata.</p></div>
+            <div class="checklist"><div>Evaluación flexible</div><div>Pagos alineados a ingresos</div><div>Mantenimiento controlado</div></div>
+          </article>
+          <article class="card vehicle">
+            <div><span class="tag blue">Opción 03</span><div class="vehicle-visual"></div><h3>Reconstruido certificado</h3><p>Unidades accidentadas con motor reconstruido y reacondicionamiento validado para bajar barrera de entrada.</p></div>
+            <div class="checklist"><div>Inspección mecánica</div><div>Historial digital de unidad</div><div>Seguro según condición</div></div>
+          </article>
+        </div>
+        <div class="addons">
+          <div class="addon"><b>Seguro</b><span>Básico, amplio o premium según tipo de unidad y perfil del socio.</span></div>
+          <div class="addon"><b>GPS</b><span>Tracking operativo, seguridad y control de rutas.</span></div>
+          <div class="addon"><b>Cámara</b><span>Grabación interior/exterior como add-on de confianza.</span></div>
+          <div class="addon"><b>Fiscal</b><span>Validación RFC, régimen, constancia y soporte documental.</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="planes">
+        <div class="section-head">
+          <h2>Planes para <span class="gradient">socios conductores</span>.</h2>
+          <p>Basic empieza bajo para captar socios; Advanced y Premium monetizan valor real: fiscal, prioridad, B2B y herramientas.</p>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <div class="top"><div><span class="tag">Basic</span><div class="price">$499 <small>MXN/mes</small></div></div></div>
+            <ul>
+              <li>Acceso a la app socio conductor</li>
+              <li>Comisión clara desde 4% por viaje</li>
+              <li>Historial de ingresos y viajes</li>
+              <li>Soporte operativo básico</li>
+              <li>Acceso a renta semanal según evaluación</li>
+            </ul>
+            <a class="btn dark" href="#cta">Entrar como Basic</a>
+          </article>
+          <article class="plan featured">
+            <div class="top"><div><span class="tag gold">Advanced</span><div class="price">$899 <small>MXN/mes</small></div></div><span class="tag green">Recomendado</span></div>
+            <ul>
+              <li>Todo Basic</li>
+              <li>Soporte fiscal integrado</li>
+              <li>Mejores oportunidades por zona</li>
+              <li>Acceso preferente a financiamiento</li>
+              <li>GPS y cámara con precio preferencial</li>
+            </ul>
+            <a class="btn" href="#cta">Solicitar Advanced</a>
+          </article>
+          <article class="plan">
+            <div class="top"><div><span class="tag blue">Premium</span><div class="price">$1,499 <small>MXN/mes</small></div></div></div>
+            <ul>
+              <li>Todo Advanced</li>
+              <li>Prioridad en hoteles, empresas y aeropuerto</li>
+              <li>Acceso a flotillas y eventos</li>
+              <li>Soporte premium y Olivia Mobility AI</li>
+              <li>Ruta de opción a compra personalizada</li>
+            </ul>
+            <a class="btn dark" href="#cta">Ser Premium</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="paquetes">
+        <div class="section-head">
+          <h2>DUC también mueve <span class="gradient">paquetes</span>.</h2>
+          <p>Esto abre ingresos adicionales para socios y casos de uso para usuarios y empresas: documentos, compras, refacciones y mensajería urgente.</p>
+        </div>
+        <div class="package-section">
+          <article class="card">
+            <span class="tag blue">Envío de paquetes</span>
+            <h3 style="font-size:38px;line-height:.98;margin-top:16px">Paquetería urbana con socio verificado.</h3>
+            <p>El usuario puede pedir un viaje o cambiar a “Enviar paquete” desde la misma app. El socio recibe el servicio como oportunidad adicional, especialmente en horas de baja demanda.</p>
+            <div class="timeline" style="margin-top:22px">
+              <div class="step"><div class="step-num">01</div><div><b>Recoger</b><span>Origen, contacto, foto del paquete y código de recolección.</span></div></div>
+              <div class="step"><div class="step-num">02</div><div><b>Transportar</b><span>Ruta en vivo, GPS, tiempo estimado y seguro opcional.</span></div></div>
+              <div class="step"><div class="step-num">03</div><div><b>Entregar</b><span>Firma, foto, código OTP y comprobante digital.</span></div></div>
+            </div>
+          </article>
+          <article class="card package-card">
+            <div class="dashboard-top"><span class="tag green">Live delivery</span><span class="tag">Roma → Santa Fe</span></div>
+            <h3>Entrega activa · $189 MXN</h3>
+            <p>Documento legal · prioridad alta · prueba de entrega requerida.</p>
+            <div class="package-map"><div class="route-curve"></div><div class="pin a"></div><div class="pin end b"></div></div>
+            <div class="pod"><div>Foto pickup</div><div>OTP entrega</div><div>Seguro opcional</div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="flotillas">
+        <div class="section-head">
+          <h2>Control Center para <span class="gradient">flotillas, hoteles y empresas</span>.</h2>
+          <p>Esta parte tiene que quedarse: es el ingreso B2B. DUC puede vender portal de supervisión, asignación de taxis, facturación y reportes.</p>
+        </div>
+        <div class="fleet-layout">
+          <article class="card control-panel">
+            <div class="dashboard-top">
+              <span class="tag gold">Portal B2B / Flotillas</span>
+              <div class="segmented"><span class="active">Hoy</span><span>Semana</span><span>Mes</span></div>
+            </div>
+            <h3 style="font-size:34px;margin-bottom:16px">Gestión de flotillas asignadas</h3>
+            <div class="kpis">
+              <div class="kpi"><span>Hoteles activos</span><b>38</b><small>+6 este mes</small></div>
+              <div class="kpi"><span>Flotillas asignadas</span><b>124</b><small>operativas</small></div>
+              <div class="kpi"><span>Viajes corporativos</span><b>1,842</b><small>mes actual</small></div>
+              <div class="kpi"><span>Liquidación</span><b>$428k</b><small>por facturar</small></div>
+            </div>
+            <div class="ops-grid">
+              <div class="ops-card">
+                <h4>Cuentas activas</h4>
+                <div class="live-list">
+                  <div class="live-item"><div><b>Hotel Reforma Grand</b><span>Concierge + facturación · 12 taxis</span></div><span class="status-dot"></span></div>
+                  <div class="live-item"><div><b>Clínica Norte</b><span>Traslados programados · 8 taxis</span></div><span class="status-dot warn"></span></div>
+                  <div class="live-item"><div><b>Centro Expo CDMX</b><span>Picos por evento · 24 taxis</span></div><span class="status-dot"></span></div>
+                  <div class="live-item"><div><b>Corporativo Santa Fe</b><span>Viajes ejecutivos · 16 taxis</span></div><span class="status-dot"></span></div>
+                </div>
+              </div>
+              <div class="ops-card">
+                <h4>Asignación por zona</h4>
+                <div class="bar-row"><span>AICM</span><div class="bar"><i style="width:88%"></i></div><small>88%</small></div>
+                <div class="bar-row"><span>Reforma</span><div class="bar"><i style="width:74%"></i></div><small>74%</small></div>
+                <div class="bar-row"><span>Santa Fe</span><div class="bar"><i style="width:63%"></i></div><small>63%</small></div>
+                <div class="bar-row"><span>Eventos</span><div class="bar"><i style="width:91%"></i></div><small>91%</small></div>
+                <div class="bar-row"><span>Paquetes</span><div class="bar"><i style="width:55%"></i></div><small>55%</small></div>
+              </div>
+            </div>
+          </article>
+          <article class="card fleet-map">
+            <div class="map-large">
+              <div class="fleet-car" style="left:52%;top:30%;transform:rotate(-20deg)"></div>
+              <div class="fleet-car" style="left:26%;top:58%;transform:rotate(18deg)"></div>
+              <div class="fleet-car" style="left:69%;top:62%;transform:rotate(-6deg)"></div>
+              <div class="fleet-car" style="left:41%;top:76%;transform:rotate(28deg)"></div>
+              <div class="fleet-bubble a"><b>AICM T2</b><span>18 socios recomendados</span></div>
+              <div class="fleet-bubble b"><b>Hotel Zone</b><span>12 unidades fijas</span></div>
+              <div class="fleet-bubble c"><b>Paquetes</b><span>8 entregas activas</span></div>
+              <div class="fleet-bubble d"><b>Evento</b><span>tarifa activa</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="control">
+        <div class="section-head">
+          <h2>Control Center operativo <span class="gradient">como en la demo actual, pero más completo</span>.</h2>
+          <p>Se conservan ingresos, socios, cobranza, demanda, bolsa de servicios, Olivia AI y viajes activos; se agregan paquetes, fiscal y flotas.</p>
+        </div>
+        <div class="card control-panel">
+          <div class="dashboard-top">
+            <div><span class="tag green">Operación nacional · Hoy</span></div>
+            <div class="segmented"><span class="active">Hoy</span><span>Semana</span><span>Mes</span></div>
+          </div>
+          <div class="kpis">
+            <div class="kpi"><span>Ingresos hoy</span><b>$284,450</b><small>+21% vs ayer</small></div>
+            <div class="kpi"><span>Socios activos</span><b>612</b><small>126 online</small></div>
+            <div class="kpi"><span>Viajes activos</span><b>82</b><small>live</small></div>
+            <div class="kpi"><span>Paquetes activos</span><b>31</b><small>9 premium</small></div>
+            <div class="kpi"><span>Mensualidades</span><b>587</b><small>pagadas</small></div>
+            <div class="kpi"><span>Pagos vencidos</span><b>25</b><small>8 +7 días</small></div>
+            <div class="kpi"><span>Demanda AICM</span><b>+32%</b><small>próx. 3h</small></div>
+            <div class="kpi"><span>Fiscal validado</span><b>91%</b><small>socios activos</small></div>
+          </div>
+          <div class="ops-grid">
+            <div class="ops-card">
+              <h4>Olivia Mobility AI recomienda</h4>
+              <p style="color:var(--soft);margin-bottom:14px">Enviar 18 conductores a AICM, activar bolsa premium en Estadio Azteca y ofrecer paquetes express en Roma/Santa Fe.</p>
+              <div class="live-list">
+                <div class="live-item"><div><b>Cobranza WhatsApp</b><span>25 socios con pagos vencidos</span></div><span class="tag gold">Enviar</span></div>
+                <div class="live-item"><div><b>Bolsa premium</b><span>Limitar acceso a 8 socios con +7 días</span></div><span class="tag">Aplicar</span></div>
+                <div class="live-item"><div><b>Fiscal</b><span>54 socios deben actualizar constancia</span></div><span class="tag blue">Revisar</span></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <h4>Bolsa de servicios</h4>
+              <div class="live-list">
+                <div class="live-item"><div><b>Aeropuerto CDMX T2</b><span>$850 MXN · 92% probability</span></div><span class="status-dot"></span></div>
+                <div class="live-item"><div><b>Roma → Santa Fe</b><span>Paquete express · $189 MXN</span></div><span class="status-dot warn"></span></div>
+                <div class="live-item"><div><b>Cuernavaca</b><span>Larga distancia · $1,250 MXN</span></div><span class="status-dot"></span></div>
+                <div class="live-item"><div><b>Estadio Azteca</b><span>Evento activo · $420 MXN</span></div><span class="status-dot"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="section" id="olivia">
+        <div class="section-head">
+          <h2>Olivia Mobility AI: <span class="gradient">la inteligencia operativa de DUC</span>.</h2>
+          <p>No es un chatbot decorativo. Olivia es la capa inteligente que ayuda a usuarios, socios, flotillas y operadores a tomar mejores decisiones en tiempo real.</p>
+        </div>
+
+        <div class="grid cols-3">
+          <article class="card">
+            <span class="tag green">Para usuarios</span>
+            <h3>Concierge de movilidad</h3>
+            <p>Ayuda a pedir viaje, reservar aeropuerto, enviar paquetes, consultar tarifa, compartir ruta, pedir factura y recibir soporte multilingüe.</p>
+            <div class="checklist" style="margin-top:16px">
+              <div>Viaje inmediato o programado</div>
+              <div>Soporte por WhatsApp / app</div>
+              <div>Seguimiento de paquete y prueba de entrega</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="tag gold">Para socios</span>
+            <h3>Copiloto del conductor</h3>
+            <p>Recomienda zonas, horarios, servicios premium y oportunidades B2B según demanda, historial, calificación, unidad y situación de pagos.</p>
+            <div class="checklist" style="margin-top:16px">
+              <div>“Ve a AICM T2: pico en 45 min”</div>
+              <div>Bolsa de servicios premium</div>
+              <div>Alertas de pagos, documentos y fiscal</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="tag blue">Para Control Center</span>
+            <h3>Dispatcher inteligente</h3>
+            <p>Analiza demanda, cobertura, unidades, paquetes, pagos vencidos, eventos, hoteles y aeropuertos para proponer acciones concretas al operador.</p>
+            <div class="checklist" style="margin-top:16px">
+              <div>Rebalanceo de socios por zona</div>
+              <div>Alertas de saturación o baja cobertura</div>
+              <div>Recomendaciones para flotillas B2B</div>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:18px">
+          <article class="card">
+            <div class="dashboard-top">
+              <span class="tag green">Olivia Live Actions</span>
+              <div class="segmented"><span class="active">Ahora</span><span>3h</span><span>Hoy</span></div>
+            </div>
+            <h3 style="font-size:34px;margin-bottom:16px">Lo que Olivia puede hacer dentro de DUC</h3>
+            <div class="live-list">
+              <div class="live-item"><div><b>Demanda</b><span>Predice picos en AICM, hoteles, eventos, estadios y zonas corporativas.</span></div><span class="tag green">AI</span></div>
+              <div class="live-item"><div><b>Seguridad</b><span>Detecta desvíos de ruta, viaje detenido, usuario en riesgo o unidad sin GPS/cámara activa.</span></div><span class="tag gold">Alerta</span></div>
+              <div class="live-item"><div><b>Paquetes</b><span>Optimiza ruta, solicita OTP, foto, firma y evidencia de entrega.</span></div><span class="tag blue">Logística</span></div>
+              <div class="live-item"><div><b>Cobranza</b><span>Genera recordatorios para mensualidades, pagos vencidos y plan de regularización.</span></div><span class="tag">WhatsApp</span></div>
+              <div class="live-item"><div><b>Fiscal</b><span>Revisa RFC, régimen, constancia, comprobantes y documentos pendientes del socio.</span></div><span class="tag blue">Revisar</span></div>
+              <div class="live-item"><div><b>Financing</b><span>Calcula si el socio puede pasar de renta semanal a opción a compra según ingresos reales.</span></div><span class="tag green">Score</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="tag gold">Ejemplo de pantalla</span>
+            <h3 style="font-size:34px;margin:16px 0">Olivia Command Feed</h3>
+            <p>El operador no solo ve datos: recibe una lista de decisiones recomendadas, listas para aplicar.</p>
+            <div class="ops-grid" style="margin-top:18px">
+              <div class="ops-card">
+                <h4>Recomendación 01</h4>
+                <p style="color:var(--soft)">Enviar 18 socios a AICM T2 antes de las 18:30 por llegada internacional y baja cobertura.</p>
+                <a class="btn dark" href="#cta" style="display:inline-flex;margin-top:8px">Aplicar</a>
+              </div>
+              <div class="ops-card">
+                <h4>Recomendación 02</h4>
+                <p style="color:var(--soft)">Activar tarifa evento para Estadio Azteca y limitar prioridad a socios Premium con seguro vigente.</p>
+                <a class="btn dark" href="#cta" style="display:inline-flex;margin-top:8px">Activar</a>
+              </div>
+              <div class="ops-card">
+                <h4>Recomendación 03</h4>
+                <p style="color:var(--soft)">Ofrecer ruta de opción a compra a 42 socios con ingresos estables y pagos al corriente.</p>
+                <a class="btn dark" href="#cta" style="display:inline-flex;margin-top:8px">Enviar oferta</a>
+              </div>
+              <div class="ops-card">
+                <h4>Recomendación 04</h4>
+                <p style="color:var(--soft)">Enviar recordatorio fiscal a 54 socios sin constancia actualizada antes de liberar servicios B2B.</p>
+                <a class="btn dark" href="#cta" style="display:inline-flex;margin-top:8px">Notificar</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>La promesa DUC: <span class="gradient">más valor para usuarios, socios y empresas</span>.</h2>
+          <p>No competir solo por precio. Competir por claridad, financiamiento, seguridad, B2B y logística.</p>
+        </div>
+        <div class="comparison">
+          <div class="compare-card">
+            <h3>Plataformas tradicionales</h3>
+            <div class="compare-list">
+              <div>App de viajes principalmente</div>
+              <div>El conductor trae su vehículo y absorbe gran parte del riesgo</div>
+              <div>Relación limitada con hoteles y negocios locales</div>
+              <div>Paquetería separada o no integrada en el mismo pitch</div>
+              <div>Poca ruta visible para crecer como socio</div>
+            </div>
+          </div>
+          <div class="compare-card duc">
+            <h3>DUC MobilityOS</h3>
+            <div class="compare-list">
+              <div>Viajes + paquetes + reservas + B2B</div>
+              <div>Opciones de vehículo, renta semanal y opción a compra</div>
+              <div>Control Center para flotillas, hoteles, clínicas y empresas</div>
+              <div>Seguridad con GPS, cámara, seguro y seguimiento</div>
+              <div>Socio conductor con planes, soporte fiscal y oportunidades premium</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta" id="cta">
+        <div>
+          <span class="eyebrow">Pitch final</span>
+          <h2>Una app tradicional te conecta con viajes. <span class="gradient">DUC conecta viajes, vehículo, paquetes, flotillas y una ruta para crecer.</span></h2>
+          <p>La landing debe vender esta idea: una app fácil para usuarios, una oportunidad real para socios conductores y un centro de control para operar empresas, hoteles, eventos y logística urbana.</p>
+        </div>
+        <div class="final-actions">
+          <a class="btn" href="#usuario">Usuario</a>
+          <a class="btn dark" href="#socios">Socio</a>
+          <a class="btn dark" href="#paquetes">Paquetes</a>
+          <a class="btn dark" href="#flotillas">Flotillas</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
