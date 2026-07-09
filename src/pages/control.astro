@@ -82,6 +82,10 @@
       padding:10px 12px;border:1px solid transparent;border-radius:999px;color:var(--muted);font-size:13px;font-weight:800;
     }
     .nav a:hover{color:var(--text);border-color:var(--line);background:rgba(255,255,255,.06)}
+    .menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.07);color:var(--text);cursor:pointer;place-items:center}
+    .menu-toggle span,.menu-toggle:before,.menu-toggle:after{content:"";display:block;width:20px;height:2px;border-radius:999px;background:currentColor;transition:.2s ease}
+    .menu-toggle{gap:4px}
+    .menu-toggle[aria-expanded="true"] span{opacity:0}.menu-toggle[aria-expanded="true"]:before{transform:translateY(6px) rotate(45deg)}.menu-toggle[aria-expanded="true"]:after{transform:translateY(-6px) rotate(-45deg)}
     .top-actions{display:flex;align-items:center;gap:8px;min-width:max-content}
     .lang{display:flex;gap:5px;border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:999px;padding:5px}
     .lang button{border:0;background:transparent;cursor:pointer;font-size:11px;color:var(--muted);font-weight:900;padding:5px 7px;border-radius:999px}
@@ -166,10 +170,11 @@
     .comparison{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare-card{padding:24px;border-radius:28px;border:1px solid var(--line);background:rgba(255,255,255,.055)}.compare-card.duc{border-color:rgba(55,231,161,.34);background:linear-gradient(155deg,rgba(55,231,161,.13),rgba(255,255,255,.045))}.compare-card h3{font-size:30px;letter-spacing:-.05em;margin:0 0 16px}.compare-list{display:grid;gap:12px}.compare-list div{display:flex;gap:10px;color:var(--soft)}.compare-list div:before{content:"—";color:var(--muted);font-weight:1000}.duc .compare-list div:before{content:"✓";color:var(--green)}
 
     .final-cta{margin-top:34px;border:1px solid rgba(255,209,118,.26);border-radius:36px;background:linear-gradient(135deg,rgba(255,209,118,.16),rgba(99,232,255,.10),rgba(255,255,255,.045));box-shadow:var(--shadow);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}.final-cta h2{font-size:clamp(34px,4.8vw,70px);letter-spacing:-.07em;line-height:.92;margin:0}.final-cta p{color:var(--soft);font-size:18px;max-width:820px;line-height:1.45}.final-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .page-footer{margin-top:26px;border-top:1px solid var(--line);padding:26px 0 0;display:flex;justify-content:space-between;gap:16px;align-items:center;color:var(--muted);font-size:13px}.back-top{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);padding:11px 14px;color:var(--text);font-weight:950}
     .note{color:var(--muted2);font-size:12px;line-height:1.45;margin-top:16px}
 
-    @media (max-width:1180px){.hero,.user-lab,.package-section,.fleet-layout,.comparison,.final-cta{grid-template-columns:1fr}.hero-stage{min-height:680px}.hero-pills,.kpis,.addons{grid-template-columns:repeat(2,1fr)}.final-actions{justify-content:flex-start}.topbar{border-radius:28px;align-items:flex-start}.nav{display:none}}
-    @media (max-width:760px){.shell{width:min(100% - 22px,1480px);padding-top:12px}.topbar{position:relative;top:auto;flex-wrap:wrap}.brand{min-width:0}.brand>div{min-width:0}.brand-title,.brand-sub{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.top-actions{width:100%;justify-content:space-between}.hero{padding-top:28px}.hero-copy{padding:24px}.hero-pills,.cols-3,.cols-4,.cols-2,.vehicle-grid,.plans,.addons,.kpis,.ops-grid,.pod{grid-template-columns:1fr}.hero-stage{min-height:660px;padding:14px}.phone{width:292px;height:580px}.mini-stack{display:none}.section-head{display:block}.section-head p{margin-top:12px}.booking-panel{left:20px;right:20px;bottom:20px}.fleet-map,.control-panel{min-height:560px}.final-cta{padding:24px}}
+    @media (max-width:1180px){.hero,.user-lab,.package-section,.fleet-layout,.comparison,.final-cta{grid-template-columns:1fr}.hero-stage{min-height:680px}.hero-pills,.kpis,.addons{grid-template-columns:repeat(2,1fr)}.final-actions{justify-content:flex-start}.topbar{border-radius:28px;align-items:flex-start;flex-wrap:wrap}.menu-toggle{display:grid}.nav{display:none}.nav.open{display:grid;grid-template-columns:1fr;width:100%;gap:8px}.nav.open a{border-color:var(--line);background:rgba(255,255,255,.055)}}
+    @media (max-width:760px){.shell{width:min(100% - 22px,1480px);padding-top:12px}.topbar{position:relative;top:auto}.brand{min-width:0;flex:1}.brand>div{min-width:0}.brand-title,.brand-sub{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.top-actions{width:100%;justify-content:space-between}.hero{padding-top:28px}.hero-copy{padding:24px}.hero-pills,.cols-3,.cols-4,.cols-2,.vehicle-grid,.plans,.addons,.kpis,.ops-grid,.pod{grid-template-columns:1fr}.hero-stage{min-height:660px;padding:14px}.phone{width:292px;height:580px}.mini-stack{display:none}.section-head{display:block}.section-head p{margin-top:12px}.booking-panel{left:20px;right:20px;bottom:20px}.fleet-map,.control-panel{min-height:560px}.final-cta{padding:24px}.page-footer{display:grid}.back-top{justify-content:center}}
   </style>
 </head>
 <body>
@@ -182,7 +187,8 @@
           <div class="brand-sub">App usuario · Socio conductor · Paquetes · Flotillas · Control Center · Olivia AI</div>
         </div>
       </a>
-      <nav class="nav" aria-label="principal">
+      <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="mobile-nav" aria-expanded="false"><span></span></button>
+      <nav class="nav" id="mobile-nav" aria-label="principal">
         <a href="#usuario">Usuario</a>
         <a href="#socios">Socios</a>
         <a href="#paquetes">Paquetes</a>
@@ -625,6 +631,10 @@
         </div>
       </section>
     </main>
+    <footer class="page-footer">
+      <span>DUC Drivers MobilityOS · Control Center</span>
+      <a class="back-top" href="#top">Back to top ↑</a>
+    </footer>
   </div>
   <script is:inline>
     const i18n = {
@@ -706,6 +716,17 @@
       localStorage.setItem("duc-lang", lang);
     }
     document.querySelectorAll(".lang button").forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.lang)));
+    const menuButton = document.querySelector(".menu-toggle");
+    const mobileNav = document.querySelector("#mobile-nav");
+    menuButton?.addEventListener("click", () => {
+      const expanded = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!expanded));
+      mobileNav?.classList.toggle("open", !expanded);
+    });
+    mobileNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+      menuButton?.setAttribute("aria-expanded", "false");
+      mobileNav?.classList.remove("open");
+    }));
     setLanguage(localStorage.getItem("duc-lang") || "es");
   </script>
 </body>
