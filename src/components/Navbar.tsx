@@ -32,6 +32,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   const path = typeof window === "undefined" ? "/" : window.location.pathname;
+  const isControlPage = path.startsWith("/control");
   const content = pick(copy, language);
 
   return (
@@ -40,9 +41,9 @@ export default function Navbar() {
         <div className="flex min-h-11 items-center justify-between gap-4">
           <a href="/" className="flex min-w-0 items-center gap-3 font-black tracking-tight" onClick={() => setOpen(false)}>
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-city-cyan to-city-blue text-sm font-black text-slate-950 shadow-glow">
-              TF
+              {isControlPage ? "DUC" : "TF"}
             </span>
-            <span className="truncate">Taxifacil por DUcDrivers Financial</span>
+            <span className="truncate">{isControlPage ? "DUC MobilityOS" : "Taxifacil por DUcDrivers Financial"}</span>
           </a>
           <button
             type="button"
