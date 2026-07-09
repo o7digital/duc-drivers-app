@@ -84,8 +84,8 @@
     .nav a:hover{color:var(--text);border-color:var(--line);background:rgba(255,255,255,.06)}
     .top-actions{display:flex;align-items:center;gap:8px;min-width:max-content}
     .lang{display:flex;gap:5px;border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:999px;padding:5px}
-    .lang span{font-size:11px;color:var(--muted);font-weight:900;padding:5px 7px;border-radius:999px}
-    .lang span:first-child{background:rgba(255,255,255,.12);color:var(--text)}
+    .lang button{border:0;background:transparent;cursor:pointer;font-size:11px;color:var(--muted);font-weight:900;padding:5px 7px;border-radius:999px}
+    .lang button.active{background:rgba(255,255,255,.12);color:var(--text)}
     .btn{
       border:0; cursor:pointer; color:#0b0b11; font-weight:950;
       border-radius:999px; padding:12px 16px;
@@ -192,7 +192,7 @@
         <a href="#planes">Planes</a>
       </nav>
       <div class="top-actions">
-        <div class="lang"><span>ES</span><span>EN</span><span>FR</span></div>
+        <div class="lang"><button class="active" data-lang="es" type="button">ES</button><button data-lang="en" type="button">EN</button><button data-lang="fr" type="button">FR</button></div>
         <a class="btn" href="#cta">Solicitar demo</a>
       </div>
     </header>
@@ -626,5 +626,87 @@
       </section>
     </main>
   </div>
+  <script>
+    const i18n = {
+      en: {
+        "App usuario · Socio conductor · Paquetes · Flotillas · Control Center · Olivia AI": "User app · Driver partner · Packages · Fleets · Control Center · Olivia AI",
+        "Usuario": "User", "Socios": "Partners", "Paquetes": "Packages", "Flotillas": "Fleets", "Planes": "Plans", "Solicitar demo": "Request demo",
+        "Nueva generación · Mobility + Financing + Logistics": "New generation · Mobility + Financing + Logistics",
+        "Más que una app de viajes.": "More than a ride app.", "Una plataforma completa para mover México.": "A complete platform to move Mexico.",
+        "DUC conecta": "DUC connects", "usuarios": "users", "socios conductores": "driver partners", "envío de paquetes": "package delivery", "flotillas": "fleets",
+        "Olivia Mobility AI": "Olivia Mobility AI", "Ver experiencia usuario": "View user experience", "Ver propuesta socio conductor": "View driver partner offer", "Ver flotillas": "View fleets",
+        "comisión por viaje": "commission per trip", "clara y competitiva": "clear and competitive", "plan socio Basic": "Basic partner plan", "líneas de negocio": "business lines", "viajes · paquetes · B2B": "rides · packages · B2B", "operación": "operation", "control, flota y AI": "control, fleet and AI",
+        "Mensaje financiero recomendado: “evaluación flexible según ingresos reales e historial operativo”. Opciones sujetas a evaluación y condiciones operativas.": "Recommended financial message: flexible evaluation based on real income and operating history. Options subject to assessment and operating conditions.",
+        "Seguro activo": "Active insurance", "Viaje": "Ride", "Paquete": "Package", "Reserva": "Booking", "Origen": "Origin", "Destino": "Destination", "Precio estimado": "Estimated price", "Socio asignado": "Assigned partner", "Cámara": "Camera", "Seguro": "Insurance", "Confirmar viaje seguro": "Confirm safe ride",
+        "Paquete express": "Express package", "Flotilla hotel": "Hotel fleet", "12 taxis asignados · concierge activo": "12 taxis assigned · active concierge", "Enviar 18 socios a AICM por pico de demanda.": "Send 18 partners to AICM due to demand peak.",
+        "El producto no es “otra plataforma de viajes”. Es un": "The product is not another ride platform. It is a", "ecosistema DUC.": "DUC ecosystem.",
+        "La fuerza está en mantener las dos caras: una app fácil para el usuario y una plataforma de crecimiento para el socio conductor.": "The strength is keeping both sides: an easy app for users and a growth platform for driver partners.",
+        "Viajes urbanos": "Urban rides", "Envío de paquetes": "Package delivery", "Socio + vehículo": "Partner + vehicle", "Flotillas B2B": "B2B fleets",
+        "Se recupera la parte": "The", "usuario / pasajero": "user / passenger", "La app debe vender confianza: viaje, reserva, paquete, seguridad, factura y soporte. Eso es lo que no podemos perder.": "The app must sell trust: rides, bookings, packages, safety, invoices and support. That cannot be lost.",
+        "App Usuario": "User App", "Una experiencia simple para pedir, reservar y enviar.": "A simple experience to request, book and send.", "Pedir viaje inmediato": "Request an immediate ride", "Reservar aeropuerto o evento": "Book airport or event", "Enviar paquete": "Send a package", "Factura y soporte": "Invoice and support",
+        "Para el socio conductor:": "For driver partners:", "viajes + vehículo + crecimiento": "rides + vehicle + growth", "Auto nuevo": "New car", "Seminuevo": "Pre-owned", "Reconstruido certificado": "Certified rebuilt",
+        "Planes para": "Plans for", "socios conductores": "driver partners", "Acceso a la app socio conductor": "Access to the driver partner app", "Comisión clara desde 4% por viaje": "Clear commission from 4% per ride", "Entrar como Basic": "Join Basic", "Solicitar Advanced": "Request Advanced", "Ser Premium": "Go Premium",
+        "DUC también mueve": "DUC also moves", "paquetes": "packages", "Paquetería urbana con socio verificado.": "Urban delivery with verified partners.", "Recoger": "Pick up", "Transportar": "Transport", "Entregar": "Deliver",
+        "Control Center para": "Control Center for", "flotillas, hoteles y empresas": "fleets, hotels and companies", "Gestión de flotillas asignadas": "Assigned fleet management", "Cuentas activas": "Active accounts", "Asignación por zona": "Zone assignment",
+        "Control Center operativo": "Operational Control Center", "como en la demo actual, pero más completo": "like the current demo, but more complete", "Operación nacional · Hoy": "National operation · Today", "Hoy": "Today", "Semana": "Week", "Mes": "Month",
+        "Ingresos hoy": "Revenue today", "Socios activos": "Active partners", "Viajes activos": "Active rides", "Paquetes activos": "Active packages", "Mensualidades": "Monthly payments", "Pagos vencidos": "Overdue payments", "Demanda AICM": "AICM demand", "Fiscal validado": "Tax validated",
+        "Olivia Mobility AI recomienda": "Olivia Mobility AI recommends", "Bolsa de servicios": "Service marketplace", "Enviar": "Send", "Aplicar": "Apply", "Revisar": "Review",
+        "Olivia Mobility AI:": "Olivia Mobility AI:", "la inteligencia operativa de DUC": "DUC's operational intelligence", "Concierge de movilidad": "Mobility concierge", "Copiloto del conductor": "Driver copilot", "Dispatcher inteligente": "Smart dispatcher",
+        "La promesa DUC:": "The DUC promise:", "más valor para usuarios, socios y empresas": "more value for users, partners and companies", "Plataformas tradicionales": "Traditional platforms", "Una app tradicional te conecta con viajes.": "A traditional app connects you to rides.", "DUC conecta viajes, vehículo, paquetes, flotillas y una ruta para crecer.": "DUC connects rides, vehicles, packages, fleets and a path to grow."
+      },
+      fr: {
+        "App usuario · Socio conductor · Paquetes · Flotillas · Control Center · Olivia AI": "App usager · Chauffeur partenaire · Colis · Flottes · Control Center · Olivia AI",
+        "Usuario": "Usager", "Socios": "Partenaires", "Paquetes": "Colis", "Flotillas": "Flottes", "Planes": "Plans", "Solicitar demo": "Demander une démo",
+        "Nueva generación · Mobility + Financing + Logistics": "Nouvelle génération · Mobilité + Financement + Logistique",
+        "Más que una app de viajes.": "Plus qu'une app de trajets.", "Una plataforma completa para mover México.": "Une plateforme complète pour faire bouger le Mexique.",
+        "DUC conecta": "DUC connecte", "usuarios": "usagers", "socios conductores": "chauffeurs partenaires", "envío de paquetes": "envoi de colis", "flotillas": "flottes",
+        "Ver experiencia usuario": "Voir l'expérience usager", "Ver propuesta socio conductor": "Voir l'offre chauffeur", "Ver flotillas": "Voir les flottes",
+        "comisión por viaje": "commission par trajet", "clara y competitiva": "claire et compétitive", "plan socio Basic": "plan partenaire Basic", "líneas de negocio": "lignes d'activité", "viajes · paquetes · B2B": "trajets · colis · B2B", "operación": "opération", "control, flota y AI": "contrôle, flotte et IA",
+        "Mensaje financiero recomendado: “evaluación flexible según ingresos reales e historial operativo”. Opciones sujetas a evaluación y condiciones operativas.": "Message financier recommandé : évaluation flexible selon revenus réels et historique opérationnel. Options soumises à évaluation et conditions d'exploitation.",
+        "Seguro activo": "Assurance active", "Viaje": "Trajet", "Paquete": "Colis", "Reserva": "Réservation", "Origen": "Origine", "Destino": "Destination", "Precio estimado": "Prix estimé", "Socio asignado": "Partenaire assigné", "Cámara": "Caméra", "Seguro": "Assurance", "Confirmar viaje seguro": "Confirmer le trajet sécurisé",
+        "Paquete express": "Colis express", "Flotilla hotel": "Flotte hôtel", "12 taxis asignados · concierge activo": "12 taxis assignés · concierge actif", "Enviar 18 socios a AICM por pico de demanda.": "Envoyer 18 partenaires à l'AICM pour un pic de demande.",
+        "El producto no es “otra plataforma de viajes”. Es un": "Le produit n'est pas une autre plateforme de trajets. C'est un", "ecosistema DUC.": "écosystème DUC.",
+        "La fuerza está en mantener las dos caras: una app fácil para el usuario y una plataforma de crecimiento para el socio conductor.": "La force est de garder les deux faces : une app simple pour l'usager et une plateforme de croissance pour le chauffeur partenaire.",
+        "Viajes urbanos": "Trajets urbains", "Envío de paquetes": "Envoi de colis", "Socio + vehículo": "Partenaire + véhicule", "Flotillas B2B": "Flottes B2B",
+        "Se recupera la parte": "On remet au centre la partie", "usuario / pasajero": "usager / passager", "La app debe vender confianza: viaje, reserva, paquete, seguridad, factura y soporte. Eso es lo que no podemos perder.": "L'app doit vendre la confiance : trajet, réservation, colis, sécurité, facture et support. C'est ce qu'il ne faut pas perdre.",
+        "App Usuario": "App usager", "Una experiencia simple para pedir, reservar y enviar.": "Une expérience simple pour demander, réserver et envoyer.", "Pedir viaje inmediato": "Demander un trajet immédiat", "Reservar aeropuerto o evento": "Réserver aéroport ou événement", "Enviar paquete": "Envoyer un colis", "Factura y soporte": "Facture et support",
+        "Para el socio conductor:": "Pour le chauffeur partenaire :", "viajes + vehículo + crecimiento": "trajets + véhicule + croissance", "Auto nuevo": "Voiture neuve", "Seminuevo": "Occasion récente", "Reconstruido certificado": "Reconstruit certifié",
+        "Planes para": "Plans pour", "socios conductores": "chauffeurs partenaires", "Acceso a la app socio conductor": "Accès à l'app chauffeur partenaire", "Comisión clara desde 4% por viaje": "Commission claire dès 4% par trajet", "Entrar como Basic": "Entrer en Basic", "Solicitar Advanced": "Demander Advanced", "Ser Premium": "Devenir Premium",
+        "DUC también mueve": "DUC transporte aussi des", "paquetes": "colis", "Paquetería urbana con socio verificado.": "Livraison urbaine avec partenaire vérifié.", "Recoger": "Collecter", "Transportar": "Transporter", "Entregar": "Livrer",
+        "Control Center para": "Control Center pour", "flotillas, hoteles y empresas": "flottes, hôtels et entreprises", "Gestión de flotillas asignadas": "Gestion des flottes assignées", "Cuentas activas": "Comptes actifs", "Asignación por zona": "Assignation par zone",
+        "Control Center operativo": "Control Center opérationnel", "como en la demo actual, pero más completo": "comme la démo actuelle, mais plus complet", "Operación nacional · Hoy": "Opération nationale · Aujourd'hui", "Hoy": "Aujourd'hui", "Semana": "Semaine", "Mes": "Mois",
+        "Ingresos hoy": "Revenus du jour", "Socios activos": "Partenaires actifs", "Viajes activos": "Trajets actifs", "Paquetes activos": "Colis actifs", "Mensualidades": "Mensualités", "Pagos vencidos": "Paiements en retard", "Demanda AICM": "Demande AICM", "Fiscal validado": "Fiscal validé",
+        "Olivia Mobility AI recomienda": "Olivia Mobility AI recommande", "Bolsa de servicios": "Place de services", "Enviar": "Envoyer", "Aplicar": "Appliquer", "Revisar": "Réviser",
+        "Olivia Mobility AI:": "Olivia Mobility AI :", "la inteligencia operativa de DUC": "l'intelligence opérationnelle de DUC", "Concierge de movilidad": "Concierge mobilité", "Copiloto del conductor": "Copilote chauffeur", "Dispatcher inteligente": "Dispatcher intelligent",
+        "La promesa DUC:": "La promesse DUC :", "más valor para usuarios, socios y empresas": "plus de valeur pour usagers, partenaires et entreprises", "Plataformas tradicionales": "Plateformes traditionnelles", "Una app tradicional te conecta con viajes.": "Une app traditionnelle connecte des trajets.", "DUC conecta viajes, vehículo, paquetes, flotillas y una ruta para crecer.": "DUC connecte trajets, véhicule, colis, flottes et une route pour grandir."
+      }
+    };
+
+    const originalText = new WeakMap();
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const textNodes = [];
+    while (walker.nextNode()) {
+      originalText.set(walker.currentNode, walker.currentNode.nodeValue);
+      textNodes.push(walker.currentNode);
+    }
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll(".lang button").forEach((button) => button.classList.toggle("active", button.dataset.lang === lang));
+      textNodes.forEach((node) => {
+        const source = originalText.get(node);
+        const trimmed = source.trim();
+        const translated = lang === "es" ? trimmed : i18n[lang][trimmed];
+        if (translated) node.nodeValue = source.replace(trimmed, translated);
+        else node.nodeValue = source;
+      });
+      localStorage.setItem("duc-lang", lang);
+    }
+    document.querySelectorAll(".lang button").forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.lang)));
+    setLanguage(localStorage.getItem("duc-lang") || "es");
+  </script>
 </body>
 </html>
